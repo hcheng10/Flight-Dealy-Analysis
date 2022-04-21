@@ -1,5 +1,5 @@
 # PIC16B_Project
 
 .  .  . <br>
-x  .  . <br>
+x  .  x <br>
 .  o  o <br>
