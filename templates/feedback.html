@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}At the end{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+  <p>
+    Many thanks to our dearest Harlin who provided us with this wonderful to let us practice what we’ve learned in real life cases.
+  </p>
+
+
+  <form method="post" id="feedback">
+    Give a score for our project <br>
+    <label for="one">   1 </label><input type="radio" id="one"   name="score" value="1"/>
+    <label for="two">   2 </label><input type="radio" id="two"   name="score" value="2"/>
+    <label for="three"> 3 </label><input type="radio" id="three" name="score" value="3"/>
+    <label for="four">  4 </label><input type="radio" id="four"  name="score" value="4"/>
+    <label for="five">  5 </label><input type="radio" id="five"  name="score" value="5" checked/><br><br>
+    <label for="comment">What do you want to say to us?</label><br>
+    <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br>
+  </form>
+  <br><br>
+  <input type="submit" id="button1" form="feedback" name="submit_button" value="Submit">
+  
+  <form method="post" id="invisible"></form>
+  <input type="submit" form="invisible" name="submit_button" value="View Feedback">
+
+ 
+  
+  {% if thanks %}
+     <br> 
+     Thanks for submitting a feedback!
+  {% endif %}
+
+  {% if error %}
+     <br> 
+     Something went wrong, please resubmit!
+  {% endif %}
+
+  {% if view %}
+    <br>
+    <b>feedbacks:</b>
+    <br><br>
+    {{view|safe}}
+  {% endif %}
+
+  {% if view_error %}
+    <br>
+    error!
+  {% endif %}
+
+{% endblock %}

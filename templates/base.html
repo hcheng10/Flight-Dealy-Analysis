@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flight Dealy Analysis-{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='project.js') }}" defer></script>
+</head>
+<body>
+<main>
+<nav>
+  <h1>LAX Flights Dealy Analysis</h1>
+  <!-- <b>Navigation:</b> -->
+  <ul>
+    <li><a href="{{ url_for('main') }}">Introduction</a></li>
+    <li><a href="{{ url_for('Data_preparation') }}">&nbsp;Data preparation</a></li>
+    <li><a href="{{ url_for('Split_Data') }}">&nbsp;Data Split</a></li>
+    <li><a href="{{ url_for('Model_Selection') }}">&nbsp;Model Selection</a></li>
+    <li><a href="{{ url_for('Feedback') }}">&nbsp;Feedback</a></li>
+  </ul>
+</nav>
+<br><br>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+    {% block content %}{% endblock %}
+    <div>
+      Project Code: <a href="https://github.com/hcheng10/PIC16B_Project">github</a><br>
+      Project Post: <a href="https://kangkai20000518.github.io/flight_data_Analysis/">post</a> 
+    </div>
+</section>
+
+</main>
+
+<footer>
+  <small> &copy; <em id="date">2022</em> Harvey Cheng </small>
+</footer>
+
+</body>
+</html>

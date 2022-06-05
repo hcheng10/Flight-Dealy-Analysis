@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Split data into training validation and testing group{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+<img src="/static/data6.png" alt="image missing" width="50%"><br>
+The above create_sequence function can convert our 2D data into a 3D array because the input of the LSTM 
+is always a 3D array. We have a total of 1533 training data. So far all the preparatory work is over.
+
+{% if error %}
+  <br> 
+  There has not message yet, please submit messages first.
+{% endif %}
+
+{% endblock %}
+  
