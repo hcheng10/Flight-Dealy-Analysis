@@ -4,6 +4,7 @@ import io
 import web_helper
 import json
 import plotly
+import pandas as pd
 
 ### stuff from last class
 app = Flask(__name__)
@@ -15,17 +16,35 @@ def main():
 
 @app.route('/Data_preparation/', methods=['POST', 'GET'])
 def Data_preparation():
+    df0 = pd.read_csv(r"data\flights_original.csv").iloc[:,:10]
+    df1 = web_helper.LAX_table()
+    df2 = web_helper.weather_data()
+    df3 = web_helper.weather_data_each_year(pd.read_csv(r"data\weather2012_2018.csv"))
+    df4 = web_helper.merge_data(df3, df1)
     if request.method == 'GET':
-        return render_template('Data_preparation.html')
+        return render_template('Data_preparation.html', table0=[df0.iloc[:10].to_html(classes='data', header="true")],
+                                                        table1=[df1.iloc[:10].to_html(classes='data', header="true")],
+                                                        table2=[df2.iloc[:10].to_html(classes='data', header="true")],
+                                                        table3=[df3.iloc[:10].to_html(classes='data', header="true")],
+                                                        table4=[df4.iloc[:10].to_html(classes='data', header="true")])
     else:
         try:
             fig1 = web_helper.plotly_flights(request.form["year"])
             fig2 = web_helper.plotly_flights2(request.form["year"])
             graphJSON1 = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
             graphJSON2 = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-            return render_template('Data_preparation.html', graphJSON1=graphJSON1, graphJSON2=graphJSON2)
+            return render_template('Data_preparation.html', table0=[df0.iloc[:10].to_html(classes='data', header="true")],
+                                                            table1=[df1.iloc[:10].to_html(classes='data', header="true")],
+                                                            table2=[df2.iloc[:10].to_html(classes='data', header="true")],
+                                                            table3=[df3.iloc[:10].to_html(classes='data', header="true")],
+                                                            table4=[df4.iloc[:10].to_html(classes='data', header="true")], 
+                                                            graphJSON1=graphJSON1, graphJSON2=graphJSON2)
         except:
-            return render_template('Data_preparation.html')
+            return render_template('Data_preparation.html', table0=[df0.iloc[:10].to_html(classes='data', header="true")],
+                                                            table1=[df1.iloc[:10].to_html(classes='data', header="true")],
+                                                            table2=[df2.iloc[:10].to_html(classes='data', header="true")],
+                                                            table3=[df3.iloc[:10].to_html(classes='data', header="true")],
+                                                            table4=[df4.iloc[:10].to_html(classes='data', header="true")])
 
 
 @app.route('/Split_Data/')

@@ -12,7 +12,16 @@
   splicing of other datasets to form a complete structure.
 </p>
 
-<img src="/static/data1.png" alt="image missing" width="70%">
+
+<figure class="table">
+  {% for table in table0 %}
+  {{ table|safe }}
+  {% endfor %}
+  <figcaption><small>Original Flights Data</small></figcaption>
+</figure>
+<!-- <img src="/static/data1.png" alt="image missing" width="70%"> -->
+
+
 
 <p>
   From the raw data, we found that there are a total of 28 columns in the flight dataset. If the unit 
@@ -21,8 +30,13 @@
   Most columns will be removed, or converted to other varibles.
 </p>
 
-
-<img src="/static/data2.png" alt="image missing" width="70%">
+<figure class="table">
+  {% for table in table1 %}
+  {{ table|safe }}
+  {% endfor %}
+  <figcaption><small>LAX Flights Data  (on-time rate is punctuality rate)</small></figcaption>
+</figure>
+<!-- <img src="/static/data2.png" alt="image missing" width="70%"> -->
 
 <p>
   We used One-Hot Encoding instead of our commonly used label Encoding in the above processing of 
@@ -35,21 +49,30 @@
 
 <h2>visulazation</h2><br>
 
-<form method="post" id="plotly1">
-  <div>Selct a year:</div><br>
-  <label for="2012"> 2012 </label><input type="radio" id="2012" name="year" value="2012"/>
-  <label for="2013"> 2013 </label><input type="radio" id="2013" name="year" value="2013"/>
-  <label for="2014"> 2014 </label><input type="radio" id="2014" name="year" value="2014"/>
-  <label for="2015"> 2015 </label><input type="radio" id="2015" name="year" value="2015"/>
-  <label for="2016"> 2016 </label><input type="radio" id="2016" name="year" value="2016"/>
-  <label for="2017"> 2017 </label><input type="radio" id="2017" name="year" value="2017"/>
-  <label for="2018"> 2018 </label><input type="radio" id="2018" name="year" value="2018"/>
-  <input type="submit" form="plotly1" name="plotly_button" value="draw">
-</form>
+<figure>
+  <form method="post" id="plotly1">
+    <div>Selct a year:</div><br>
+    <label for="2012"> 2012 </label><input type="radio" id="2012" name="year" value="2012"/>
+    <label for="2013"> 2013 </label><input type="radio" id="2013" name="year" value="2013"/>
+    <label for="2014"> 2014 </label><input type="radio" id="2014" name="year" value="2014"/>
+    <label for="2015"> 2015 </label><input type="radio" id="2015" name="year" value="2015"/>
+    <label for="2016"> 2016 </label><input type="radio" id="2016" name="year" value="2016"/>
+    <label for="2017"> 2017 </label><input type="radio" id="2017" name="year" value="2017"/>
+    <label for="2018"> 2018 </label><input type="radio" id="2018" name="year" value="2018"/>
+    <input type="submit" form="plotly1" name="plotly_button" value="draw">
+  </form><br>
+
+  <span id="chart1"></span>
+  <figcaption><small></small></figcaption>
+</figure>
+
+<figure>
+  <span id="chart2"></span>
+  <figcaption></figcaption>
+</figure>
 
 
-<div id="chart1"></div><br><br>
-<div id="chart2"></div>
+
 <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 <script type='text/javascript'>
   var graphs1 = {{graphJSON1 | safe}};
@@ -59,7 +82,7 @@
 </script>
 
 <p>
-  According to the image, we can conclude that the overall flight punctuality rate tends to be a stable sequence, 
+  According to the plots, we can conclude that the overall flight punctuality rate tends to be a stable sequence, 
   that is, a sequence with no obvious upward or downward trend, and the average punctuality rate is about 70%-90%. 
   The punctuality rate is inversely proportional, which is also in line with our intuition that the punctuality rate 
   of the aircraft is not high when the shipping pressure is high. When we look at the data corresponding to the number 
@@ -68,16 +91,30 @@
 </p>
 
 <h2>Weather Data</h2>
-<img src="/static/data3.png" alt="image missing" width="50%">
+<figure class="table">
+  {% for table in table2 %}
+  {{ table|safe }}
+  {% endfor %}
+  <figcaption><small>LAX Weather Data</small></figcaption>
+</figure>
+<!-- <img src="/static/data3.png" alt="image missing" width="50%"> -->
 <p>
   Before processing, let's take a look at the raw data. We found that the monitoring station will measure 4 times a day, 
   the first time is 22:00, the second time is 16:00, the third time is 10:10, and the fourth time is 22:00. But don’t 
-  forget that the unit of our final data is each day, so the time doesn’t matter, so in the function below, we will deal 
+  forget that the unit of our final data is each day, so the time doesn't matter, so in the function below, we will deal 
   with the time. And the varible name of the original data is not very clear, so we have to rename the variable name to help 
   everyone better understand the corresponding real meaning.
 </p>
 
-<img src="/static/data4.png" alt="image missing" width="70%">
+<figure class="table">
+  {% for table in table3 %}
+  {{ table|safe }}
+  {% endfor %}
+  <figcaption><small>LAX Weather Data After Data Processing</small></figcaption>
+</figure>
+
+<!-- <img src="/static/data4.png" alt="image missing" width="70%"> -->
+
 <p>
   From the above table, it can be found that I calculated the average wind speed and visibility for each day, and for 
   the calculation of precipitation I used the sum function to sum instead of the average. This is because the precipitation 
@@ -94,7 +131,14 @@
   instead of the standard scaler. Because I found that our data is not a normal distribution, so Min-Max will be more suitable 
   for our project.
 </p>
-<img src="/static/data5.png" alt="image missing" width="70%">
+<figure class="table">
+  {% for table in table4 %}
+  {{ table|safe }}
+  {% endfor %}
+  <figcaption><small>Merge The Weather Data and Flights Data</small></figcaption>
+</figure>
+
+<!-- <img src="/static/data5.png" alt="image missing" width="70%"> -->
 <p>
   Before dividing the data into training set and test set, we need to reorder the data, because our standard of division is to 
   divide the data into 60% training set, 20% vaildation group and 20% test set in chronological order rather than randomly.
