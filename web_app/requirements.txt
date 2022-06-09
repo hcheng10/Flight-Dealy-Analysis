@@ -8,3 +8,4 @@ Werkzeug==0.15.6
 numpy==1.22.3
 pandas==1.4.1
 plotly==5.6.0
+Scikit-learn==0.23
