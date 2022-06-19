@@ -23,7 +23,7 @@ def get_message_db():
     return g.message_db
 
 
-# this function could inserting a user message into the database of messages.
+# this function insert a user message into the database of messages.
 def insert_message(request):
     score = request.form["score"]
     message = request.form["comment"]
